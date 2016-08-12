@@ -1,17 +1,20 @@
 #include "status.h"
 
-void get_line(FILE* f, char* match, char* line) {
+int get_line(FILE* f, char* match, char* line) {
+
 
     while(1) {
         char *l = fgets(line, LINE_LEN, f);
         if (!l) {
-            break;
+            return 1;
         }
 
         if (strstr(l, match)) {
             break;
         }
     }
+
+    return 0;
 }
 
 float get_float(char* line) {

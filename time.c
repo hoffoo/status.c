@@ -1,10 +1,19 @@
 #include "status.h"
 
-char* now() {
+struct tm *_time;
+
+void init_time() __attribute__((constructor));
+void print_time();
+
+void init_time() {
 
     time_t now = time(NULL);
-    struct tm *t;
-    t = localtime(&now);
+    _time = localtime(&now);
 
-    return asctime(t);
+    plugin(print_time);
+}
+
+void print_time() {
+
+    printf("%s", asctime(_time));
 }
