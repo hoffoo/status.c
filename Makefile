@@ -1,6 +1,6 @@
 
-all:
-	gcc -Wall plugin.c battery.c util.c time.c status.c
+laptop:
+	gcc -Wall plugin.c util.c battery.c mem.c time.c main.c
 
 desktop:
-	gcc -Wall plugin.c util.c time.c status.c
+	gcc -Wall plugin.c util.c           mem.c time.c main.c
