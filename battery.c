@@ -64,7 +64,7 @@ int get_battery(battery* b) {
 
 void print_battery() {
 
-    char *str = malloc(sizeof(char)*LINE_LEN);
+    char *str = malloc(LINE_LEN);
     switch(_battery->state){
     case(0):
         sprintf(str, "unplugged %.0f%% ", _battery->charge);
