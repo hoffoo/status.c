@@ -13,7 +13,6 @@ battery* _battery = NULL;
 
 void init_battery() {
 
-    _battery = malloc(sizeof(battery));
     int err = get_battery(_battery);
 
     if (err) {
@@ -24,9 +23,12 @@ void init_battery() {
 int get_battery(battery* b) {
 
     FILE* f = fopen("/proc/acpi/battery/BAT0/state", "r");
-    if (f == NULL) {
+    if (errno) {
+        errno = 0;
         return 1;
     }
+
+    _battery = malloc(sizeof(battery));
 
     char line[LINE_LEN];
     memset(line, 0, LINE_LEN);
@@ -63,6 +65,10 @@ int get_battery(battery* b) {
 }
 
 void print_battery() {
+
+    if (!_battery) {
+        return;
+    }
 
     char *str = malloc(LINE_LEN);
     switch(_battery->state){
