@@ -66,6 +66,5 @@ void print_temp() {
 
         // NOTE: not freeing anything on purpose
     }
-    //printf("%0.f°C", sum/core_count);
-    printf("%0.fC", sum/core_count);
+    printf("%0.f°C", sum/core_count);
 }
