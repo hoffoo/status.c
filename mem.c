@@ -1,7 +1,7 @@
 #include "status.h"
 
 void init_mem() __attribute__((constructor));
-void print_mem();
+int print_mem(char *str);
 
 char memfree[LINE_LEN];
 
@@ -17,7 +17,8 @@ void init_mem() {
     plugin(print_mem);
 }
 
-void print_mem() {
+int print_mem(char *str) {
 
-    printf("%.0fMB", get_float(memfree)/1024);
+    sprintf(str, "%.0fMB", get_float(memfree)/1024);
+    return STATE_OK;
 }

@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <errno.h>
+#include <assert.h>
 
 #define LINE_LEN 50
 

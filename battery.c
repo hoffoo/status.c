@@ -7,7 +7,7 @@ typedef struct {
 
 void init_battery() __attribute__((constructor));
 int get_battery(battery* b);
-void print_battery();
+int print_battery(char *str);
 
 battery* _battery = NULL;
 
@@ -16,7 +16,7 @@ void init_battery() {
     int err = get_battery(_battery);
 
     if (err) {
-        plugin((void*)print_battery);
+        plugin(print_battery);
     }
 }
 
@@ -64,26 +64,27 @@ int get_battery(battery* b) {
     return 0;
 }
 
-void print_battery() {
+int print_battery(char *str) {
 
     if (!_battery) {
-        return;
+        return STATE_OK;
     }
 
-    char *str = malloc(LINE_LEN);
     switch(_battery->state){
     case(0):
         sprintf(str, "unplugged %.0f%% ", _battery->charge);
-        break;
+        return STATE_WARN;
     case(1):
         sprintf(str, "charging %.0f%% ", _battery->charge);
-        break;
+        return STATE_OK;
     case(2):
-        str = "";
-        break;
+        // battery is full
+        return STATE_OK;
     default:
-        str = "battery unknown ";
+        sprintf(str, "battery unknown");
+        return STATE_CRIT;
     }
 
-    printf(str);
+    // unreachable
+    assert(0);
 }

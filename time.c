@@ -3,7 +3,7 @@
 struct tm *_time;
 
 void init_time() __attribute__((constructor));
-void print_time();
+int print_time(char *str);
 
 void init_time() {
 
@@ -13,7 +13,8 @@ void init_time() {
     plugin(print_time);
 }
 
-void print_time() {
+int print_time(char *str) {
 
-    printf("%s", asctime(_time));
+    sprintf(str, "%s", asctime(_time));
+    return STATE_OK;
 }

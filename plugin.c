@@ -1,7 +1,7 @@
 #include "plugin.h"
 #include <stdio.h>
 
-void (*fns[MAX_PLUGINS]) ();
+int (*fns[MAX_PLUGINS]) (char *);
 int pidx = 0;
 
 void plugin(void* p) {
@@ -16,8 +16,10 @@ void plugin(void* p) {
 
 void unrwap_plugins() {
 
+    char str[50];
     for (int i = 0; i < pidx; i++) {
-        (*fns[i])();
-        printf(" ");
+        char s = (char)(*fns[i])(str);
+        printf("%c%s%c ", s, str, STATE_RESET);
     }
+    printf("\n");
 }

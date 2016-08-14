@@ -6,7 +6,7 @@
 #define _SENSORS_CONFIG "/etc/sensors3.conf"
 
 void init_temp() __attribute__((constructor));
-void print_temp();
+int print_temp(char *str);
 
 void init_temp() {
 
@@ -23,7 +23,7 @@ void init_temp() {
     plugin(print_temp);
 }
 
-void print_temp() {
+int print_temp(char *str) {
 
     double value = 0;
     double sum = 0;
@@ -66,5 +66,8 @@ void print_temp() {
 
         // NOTE: not freeing anything on purpose
     }
-    printf("%0.f°C", sum/core_count);
+
+    sprintf(str, "%0.f°C", sum/core_count);
+
+    return STATE_OK;
 }
