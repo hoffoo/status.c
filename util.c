@@ -2,7 +2,6 @@
 
 int get_line(FILE* f, char* match, char* line) {
 
-
     while(1) {
         char *l = fgets(line, LINE_LEN, f);
         if (!l) {

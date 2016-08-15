@@ -4,3 +4,6 @@ all:
 
 test: all
 	./a.out
+
+install: all
+	mv a.out ~/usr/status

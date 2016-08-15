@@ -67,7 +67,14 @@ int print_temp(char *str) {
         // NOTE: not freeing anything on purpose
     }
 
-    sprintf(str, "%0.f°C", sum/core_count);
+    double avg = sum/core_count;
+    sprintf(str, "%0.f°C", avg);
+
+    if (avg > 40) {
+        return STATE_WARN;
+    } else if (avg > 50) {
+        return STATE_CRIT;
+    }
 
     return STATE_OK;
 }

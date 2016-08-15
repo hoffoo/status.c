@@ -19,6 +19,14 @@ void init_mem() {
 
 int print_mem(char *str) {
 
-    sprintf(str, "%.0fMB", get_float(memfree)/1024);
+    float freemb = get_float(memfree)/1024;
+    sprintf(str, "%.0fMB", freemb);
+
+    if (freemb < 300) {
+        return STATE_WARN;
+    } else if (freemb < 100) {
+        return STATE_CRIT;
+    }
+
     return STATE_OK;
 }
