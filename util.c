@@ -32,3 +32,14 @@ float get_float(char* line) {
 
     return atoi(ints);
 }
+
+char* clean_str(char *str) {
+
+    for (int i = 0;;i++) {
+        if (str[i] == '\n') {
+            str[i] = '\0';
+            break;
+        }
+    }
+    return str;
+}

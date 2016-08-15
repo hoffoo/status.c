@@ -15,6 +15,6 @@ void init_time() {
 
 int print_time(char *str) {
 
-    sprintf(str, "%s", asctime(_time));
+    sprintf(str, clean_str(asctime(_time)));
     return STATE_OK;
 }

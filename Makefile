@@ -6,4 +6,4 @@ test: all
 	./a.out
 
 install: all
-	mv a.out ~/usr/status
+	cp a.out ~/usr/status

@@ -13,3 +13,4 @@
 
 int get_line(FILE* f, char* match, char* line);
 float get_float(char* line);
+char* clean_str(char* str);
