@@ -20,15 +20,12 @@ void plugin(void* p) {
 void unrwap_plugins(conf *cfg) {
 
     char str[50];
-    memset(&str, 0, 50);
     for (int i = 0; i < pidx; i++) {
         char cur_state = (char)(*fns[i])(str);
         if (cfg->color && cur_state != STATE_OK) {
-            putchar(cur_state);
-        }
-        printf(str);
-        if (cfg->color && cur_state != STATE_OK) {
-            putchar(STATE_RESET);
+            printf("%c%s%c", cur_state, str, STATE_RESET);
+        } else {
+            printf(str);
         }
         putchar(' ');
     }
