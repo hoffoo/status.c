@@ -1,4 +1,3 @@
-#include "plugin.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +7,8 @@
 #include <errno.h>
 #include <assert.h>
 #include <getopt.h>
+
+#include "plugin.h"
 
 #define LINE_LEN 50
 

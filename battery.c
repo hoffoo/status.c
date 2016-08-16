@@ -16,8 +16,10 @@ void init_battery() {
     int err = get_battery(_battery);
 
     if (err) {
-        plugin(print_battery);
+        return;
     }
+
+    plugin(print_battery);
 }
 
 int get_battery(battery* b) {

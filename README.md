@@ -9,7 +9,7 @@ I use it like this in my .xinitrc:
 
 while true
 do
-    xsetroot -name "$(status.o)"
+    xsetroot -name "$(status --color)"
     sleep 1
 done &
 

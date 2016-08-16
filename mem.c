@@ -8,8 +8,6 @@ char memfree[LINE_LEN];
 void init_mem() {
 
     FILE* f = fopen("/proc/meminfo", "r");
-
-
     memset(memfree, 0, LINE_LEN);
 
     get_line(f, "MemFree", memfree);
