@@ -2,9 +2,6 @@
 
 #include "status.h"
 
-#define DISK_WARN 250
-#define DISK_CRIT 100
-
 void init_disk() __attribute__((constructor));
 int print_disk(char *str);
 
@@ -21,7 +18,7 @@ void init_disk() {
     }
 
     _disk_mb = (fs.f_bsize*fs.f_bavail)/1024/1024;
-    if (_disk_mb <= DISK_WARN) {
+    if (_disk_mb <= DISK_SHOW) {
         plugin(print_disk);
     }
 }

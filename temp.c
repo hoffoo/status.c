@@ -3,10 +3,10 @@
 
 #include "status.h"
 
-#define _SENSORS_CONFIG "/etc/sensors3.conf"
-
 void init_temp() __attribute__((constructor));
 int print_temp(char *str);
+
+double _temp_avg = 0;
 
 void init_temp() {
 
@@ -19,11 +19,6 @@ void init_temp() {
     if (sensors_init(f)) {
         return;
     }
-
-    plugin(print_temp);
-}
-
-int print_temp(char *str) {
 
     double value = 0;
     double sum = 0;
@@ -45,6 +40,7 @@ int print_temp(char *str) {
             if (feature == NULL) {
                 break;
             }
+
             // only show core temp
             if (!strstr(sensors_get_label(chip, feature), "Core")) {
                 continue;
@@ -67,12 +63,20 @@ int print_temp(char *str) {
         // NOTE: not freeing anything on purpose
     }
 
-    double avg = sum/core_count;
-    sprintf(str, "%0.f°C", avg);
+    _temp_avg = sum/core_count;
 
-    if (avg > 40) {
+    if (_temp_avg > TEMP_SHOW) {
+        plugin(print_temp);
+    }
+}
+
+int print_temp(char *str) {
+    sprintf(str, "%0.f°C", _temp_avg);
+
+    if (_temp_avg > TEMP_WARN) {
         return STATE_WARN;
-    } else if (avg > 50) {
+    }
+    if (_temp_avg > TEMP_WARN) {
         return STATE_CRIT;
     }
 

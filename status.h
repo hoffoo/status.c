@@ -8,6 +8,7 @@
 #include <assert.h>
 #include <getopt.h>
 
+#include "config.h"
 #include "plugin.h"
 
 #define LINE_LEN 50

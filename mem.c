@@ -6,10 +6,6 @@ int print_mem(char *str);
 char _memfree[LINE_LEN];
 float _freemb = 0;
 
-#define MEM_SHOW 2000
-#define MEM_WARN 600
-#define MEM_CRIT 300
-
 void init_mem() {
 
     FILE* f = fopen("/proc/meminfo", "r");
