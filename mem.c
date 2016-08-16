@@ -3,26 +3,34 @@
 void init_mem() __attribute__((constructor));
 int print_mem(char *str);
 
-char memfree[LINE_LEN];
+char _memfree[LINE_LEN];
+float _freemb = 0;
+
+#define MEM_SHOW 2000
+#define MEM_WARN 600
+#define MEM_CRIT 300
 
 void init_mem() {
 
     FILE* f = fopen("/proc/meminfo", "r");
-    memset(memfree, 0, LINE_LEN);
 
-    get_line(f, "MemFree", memfree);
+    get_line(f, "MemFree", _memfree);
+    _freemb = get_float(_memfree)/1024;
 
-    plugin(print_mem);
+    if (_freemb <= MEM_SHOW) {
+        plugin(print_mem);
+    }
 }
 
 int print_mem(char *str) {
 
-    float freemb = get_float(memfree)/1024;
-    sprintf(str, "%.0fMB", freemb);
+    sprintf(str, "%.0fMB", _freemb);
 
-    if (freemb < 300) {
+    if (_freemb <= MEM_WARN) {
         return STATE_WARN;
-    } else if (freemb < 100) {
+    }
+
+    if (_freemb <= MEM_CRIT) {
         return STATE_CRIT;
     }
 
