@@ -25,8 +25,7 @@ void unrwap_plugins(conf *cfg) {
         if (cfg->color && cur_state != STATE_OK) {
             printf("%c%s%c", cur_state, str, STATE_RESET);
         } else {
-            printf(str);
+            printf("%s ", str);
         }
-        putchar(' ');
     }
 }

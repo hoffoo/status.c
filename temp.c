@@ -73,11 +73,11 @@ void init_temp() {
 int print_temp(char *str) {
     sprintf(str, "%0.f°C", _temp_avg);
 
-    if (_temp_avg > TEMP_WARN) {
-        return STATE_WARN;
+    if (_temp_avg > TEMP_CRIT) {
+        return STATE_CRIT;
     }
     if (_temp_avg > TEMP_WARN) {
-        return STATE_CRIT;
+        return STATE_WARN;
     }
 
     return STATE_OK;
