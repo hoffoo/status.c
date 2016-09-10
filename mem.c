@@ -10,7 +10,7 @@ void init_mem() {
 
     FILE* f = fopen("/proc/meminfo", "r");
 
-    get_line(f, "MemFree", _memfree);
+    get_line(f, "MemAvailable", _memfree);
     _freemb = get_float(_memfree)/1024;
 
     if (_freemb <= MEM_SHOW) {
