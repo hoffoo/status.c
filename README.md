@@ -3,6 +3,7 @@
 Status is a quiet status indicator. It avoids clutter by only showing things when they reach a threshold.
 
 ![screenshot](screenshot.png)
+
 _note: usually this much output is disabled. thresholds are configured in config.h_
 
 ## reports
